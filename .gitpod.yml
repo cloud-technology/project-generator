@@ -1,2 +1,9 @@
 tasks:
   - init: yes | sdk install java 17.0.3.1-librca
+
+vscode:
+  extensions:
+    - vscjava.vscode-java-pack
+    - Pivotal.vscode-boot-dev-pack
+    - GabrielBB.vscode-lombok
+
