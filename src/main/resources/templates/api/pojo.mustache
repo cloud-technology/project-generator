@@ -1,0 +1,83 @@
+/**
+ * {{description}}{{^description}}{{classname}}{{/description}}
+ */
+{{>additionalModelTypeAnnotations}}
+{{#description}}
+{{#swagger1AnnotationLibrary}}
+@ApiModel(description = "{{{description}}}")
+{{/swagger1AnnotationLibrary}}
+{{#swagger2AnnotationLibrary}}
+@Schema({{#name}}name = "{{name}}", {{/name}}description = "{{{description}}}")
+{{/swagger2AnnotationLibrary}}
+{{/description}}
+{{#discriminator}}
+{{>typeInfoAnnotation}}
+{{/discriminator}}
+{{#jackson}}
+{{#isClassnameSanitized}}
+@JsonTypeName("{{name}}")
+{{/isClassnameSanitized}}
+{{/jackson}}
+{{#withXml}}
+{{>xmlAnnotation}}
+{{/withXml}}
+{{>generatedAnnotation}}
+{{#vendorExtensions.x-class-extra-annotation}}
+{{{vendorExtensions.x-class-extra-annotation}}}
+{{/vendorExtensions.x-class-extra-annotation}}
+public record {{classname}} (
+
+  {{#vars}}
+
+    {{#isEnum}}
+    {{^isContainer}}
+{{>enumClass}}
+    {{/isContainer}}
+    {{#isContainer}}
+    {{#mostInnerItems}}
+{{>enumClass}}
+    {{/mostInnerItems}}
+    {{/isContainer}}
+    {{/isEnum}}
+  {{#jackson}}
+  @JsonProperty("{{baseName}}")
+  {{#useBeanValidation}}
+  {{>beanValidation}}
+  {{/useBeanValidation}}
+  {{#swagger2AnnotationLibrary}}
+  @Schema(name = "{{{baseName}}}", {{#isReadOnly}}accessMode = Schema.AccessMode.READ_ONLY, {{/isReadOnly}}{{#example}}example = "{{{.}}}", {{/example}}{{#description}}description = "{{{.}}}", {{/description}}required = {{{required}}})
+  {{/swagger2AnnotationLibrary}}
+  {{#withXml}}
+  @JacksonXmlProperty({{#isXmlAttribute}}isAttribute = true, {{/isXmlAttribute}}{{#xmlNamespace}}namespace="{{.}}", {{/xmlNamespace}}localName = "{{xmlName}}{{^xmlName}}{{baseName}}{{/xmlName}}")
+  {{/withXml}}
+  {{/jackson}}
+  {{#gson}}
+  @SerializedName("{{baseName}}")
+  {{/gson}}
+  {{#vendorExtensions.x-field-extra-annotation}}
+  {{{vendorExtensions.x-field-extra-annotation}}}
+  {{/vendorExtensions.x-field-extra-annotation}}
+  {{#isContainer}}
+  {{#openApiNullable}}
+  {{>nullableDataType}} {{name}}{{^-last}}, {{/-last}}
+  {{/openApiNullable}}
+  {{^openApiNullable}}
+  {{>nullableDataType}} {{name}}{{^-last}}, {{/-last}}
+  {{/openApiNullable}}
+  {{/isContainer}}
+  {{^isContainer}}
+  {{#isDate}}
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+  {{/isDate}}
+  {{#isDateTime}}
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  {{/isDateTime}}
+  {{#openApiNullable}}
+  {{>nullableDataType}} {{name}}{{^-last}}, {{/-last}}
+  {{/openApiNullable}}
+  {{^openApiNullable}}
+  {{>nullableDataType}} {{name}}{{^-last}}, {{/-last}}
+  {{/openApiNullable}}
+  {{/isContainer}}
+  {{/vars}}
+){{#vendorExtensions.x-implements}}{{#-first}} implements {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{/vendorExtensions.x-implements}} {}

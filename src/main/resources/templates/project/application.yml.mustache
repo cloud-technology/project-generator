@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: {{name}}
+  sleuth:
+    sampler:
+      probability: 1.0
+  profiles:
+    active:
+    - dev
+
+server:
+  shutdown: graceful
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, mappings, prometheus
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  info:
+    git:
+      mode: simple

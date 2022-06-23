@@ -1,0 +1,62 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.ct'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	// 因為 openapi 有包此套件, 故排除
+	implementation.exclude group: 'org.slf4j', module: 'slf4j-simple'
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2021.0.3")
+	set('openapiGeneratorVersion', "6.0.0") // https://search.maven.org/artifact/org.openapitools/openapi-generator
+	set('jooqVersion', "3.16.6") // https://search.maven.org/artifact/org.jooq/jooq-parent 3.16.6
+	set('liquibaseCoreVersion', "4.11.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
+	set('springdocVersion', "1.6.9") // https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//
+	implementation "org.openapitools:openapi-generator:${openapiGeneratorVersion}"
+	//
+	implementation "org.jooq:jooq:${jooqVersion}"
+	implementation "org.jooq:jooq-meta:${jooqVersion}"
+	implementation "org.jooq:jooq-codegen:${jooqVersion}"
+	// https://search.maven.org/artifact/jakarta.xml.bind/jakarta.xml.bind-api
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+	implementation "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
+	implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

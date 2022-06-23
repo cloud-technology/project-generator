@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: history/changelog-init.yaml
+      relativeToChangelogFile: true
+      description: 初始化表格

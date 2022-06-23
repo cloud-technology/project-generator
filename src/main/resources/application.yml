@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: project-builder
+  sleuth:
+    sampler:
+      probability: 1.0
+  profiles:
+    active:
+    - dev
+
+
+project-builder:
+  api: 'openAPIGenerator'
+  repository: 'jooqGenerator'
+  schemaVersioning: 'liquibaseGenerator'
+
+
+
+logging:
+  level:
+    root: info
+    com.ct.builder: debug

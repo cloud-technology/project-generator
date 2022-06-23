@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  postgres: # https://hub.docker.com/_/postgres
+    image: 'postgres:14.2'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'user1'
+      POSTGRES_PASSWORD: 'pw123456'
+      POSTGRES_DB: 'devdb'
+    logging:
+      driver: json-file
+      options:
+        max-size: 20m
+        max-file: '2'
+  # redis: # https://hub.docker.com/_/redis
+  #   image: 'redis:6.2.6'
+  #   restart: always
+  #   command: >
+  #         --requirepass "pw123456"
+  #   ports:
+  #     - '6379:6379'
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: 10m
+  #       max-file: '3'
+

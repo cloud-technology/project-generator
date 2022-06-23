@@ -1,0 +1,139 @@
+openapi: 3.0.0
+x-stoplight:
+  id: yz8aqgqygkt6o
+info:
+  title: project-generator
+  version: 1.0.0
+  description: 專案模板產生器
+  contact:
+    name: SamZhu
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /project:
+    post:
+      summary: create project
+      operationId: create-project
+      responses:
+        '201':
+          description: Created
+          content:
+            application/zip:
+              schema:
+                type: object
+                properties: {}
+            application/json:
+              schema:
+                type: object
+                properties: {}
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 編譯工具
+                  default: gradle
+                  enum:
+                    - gradle-project
+                    - maven-project
+                groupId:
+                  type: string
+                  default: com.example
+                artifactId:
+                  type: string
+                  default: demo
+                name:
+                  type: string
+                description:
+                  type: string
+                packageName:
+                  type: string
+                  default: com.example.demo
+                  description: package 根路徑
+                jvmVersion:
+                  type: string
+                  enum:
+                    - '17'
+                openAPIFile:
+                  type: string
+                  format: binary
+                  description: OpenAPI 檔案
+                dbUrl:
+                  type: string
+                  example: 'jdbc:postgresql://127.0.0.1/devdb'
+                dbUsername:
+                  type: string
+                  example: user1
+                dbPassword:
+                  type: string
+                  example: pw123456
+                runtime:
+                  type: string
+                  enum:
+                    - GKE
+                    - CLOUDRUN
+              required:
+                - type
+                - groupId
+                - artifactId
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+      tags:
+        - Project
+      description: 建立專案
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      x-examples:
+        Alice Smith:
+          id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+  parameters: {}
+tags:
+  - name: Project

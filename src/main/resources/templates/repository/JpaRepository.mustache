@@ -1,0 +1,33 @@
+package {{packageName}};
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+import {{packageName}}.tables.pojos.{{className}};
+
+@RepositoryRestResource
+public interface {{className}}Repository extends JpaRepository<{{className}}, {{primaryKeyType}}> {
+
+    // Prevents GET /object/:id
+    @Override
+    @RestResource(exported = true)
+    {{className}} getReferenceById({{primaryKeyType}} id);
+
+    // Prevents GET /object
+    @Override
+    @RestResource(exported = true)
+    Page<{{className}}> findAll(Pageable pageable);
+
+    // Prevents POST /object and PATCH /object/:id
+    @Override
+    @RestResource(exported = true)
+    {{className}} save({{className}} o);
+
+    // Prevents DELETE /object/:id
+    @Override
+    @RestResource(exported = true)
+    void delete({{className}} o);
+}
