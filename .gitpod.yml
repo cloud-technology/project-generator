@@ -1,2 +1,2 @@
 tasks:
-  - init: sdk install java 17.0.3.1-librca
+  - init: yes | sdk install java 17.0.3.1-librca
