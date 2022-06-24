@@ -40,17 +40,11 @@ dependencies {
   implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
   implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
   implementation 'org.springframework.cloud:spring-cloud-stream'
-  compileOnly 'org.projectlombok:lombok'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
   runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
   runtimeOnly 'org.postgresql:postgresql'
+  compileOnly 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  testImplementation 'org.testcontainers:junit-jupiter'
-  testImplementation 'org.testcontainers:postgresql'
-  // for test
-  testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
   //
   implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
   implementation "org.springdoc:springdoc-openapi-data-rest:${springdocVersion}"
@@ -64,6 +58,12 @@ dependencies {
 	implementation 'com.google.cloud:spring-cloud-gcp-starter-logging'
   // chaos-monkey
 	implementation "de.codecentric:chaos-monkey-spring-boot:${chaosMonkeyVersion}"
+  // for test
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+  testImplementation 'org.testcontainers:junit-jupiter'
+  testImplementation 'org.testcontainers:postgresql'
 }
 
 dependencyManagement {
