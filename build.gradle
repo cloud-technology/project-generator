@@ -22,6 +22,7 @@ repositories {
 
 ext {
 	set('springCloudVersion', "2021.0.3")
+	set('testcontainersVersion', "1.17.2")
 	set('openapiGeneratorVersion', "6.0.0") // https://search.maven.org/artifact/org.openapitools/openapi-generator
 	set('jooqVersion', "3.16.6") // https://search.maven.org/artifact/org.jooq/jooq-parent 3.16.6
 	set('liquibaseCoreVersion', "4.11.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
@@ -48,12 +49,16 @@ dependencies {
 	// https://search.maven.org/artifact/jakarta.xml.bind/jakarta.xml.bind-api
 	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
 	implementation "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
-	implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
+	implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"  
+	//
+	testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
 }
 
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
 	}
 }
 
