@@ -1,4 +1,4 @@
-package com.ct;
+package com.ct.builder;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
