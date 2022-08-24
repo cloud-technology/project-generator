@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.0'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.7.3'
+  id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+  id 'java'
 }
 
 group = 'com.ct'
@@ -22,11 +22,11 @@ repositories {
 
 ext {
 	set('springCloudVersion', "2021.0.3")
-	set('testcontainersVersion', "1.17.2")
-	set('openapiGeneratorVersion', "6.0.0") // https://search.maven.org/artifact/org.openapitools/openapi-generator
-	set('jooqVersion', "3.16.6") // https://search.maven.org/artifact/org.jooq/jooq-parent 3.16.6
-	set('liquibaseCoreVersion', "4.11.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
-	set('springdocVersion', "1.6.9") // https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui
+	set('testcontainersVersion', "1.17.3") // https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
+	set('openapiGeneratorVersion', "6.0.1") // https://search.maven.org/artifact/org.openapitools/openapi-generator
+	set('jooqVersion', "3.16.9") // https://search.maven.org/artifact/org.jooq/jooq-parent
+	set('liquibaseCoreVersion', "4.15.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
+	set('springdocVersion', "1.6.11") // https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui
 }
 
 dependencies {

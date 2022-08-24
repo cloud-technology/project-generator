@@ -39,17 +39,6 @@ bin/
 .vscode/
 
 # SpringBoot Config #
-**/application-*.yml
-!config/application-dev.yml
-!config/application-gcp.yml
-!config/application-unittest.yml
-!config/application-loadtests.yml
-
-**/application-*.properties
-!config/application-dev.properties
-!config/application-gcp.properties
-!config/application-unittest.properties
-!config/application-loadtests.properties
 
 
 # Mac #

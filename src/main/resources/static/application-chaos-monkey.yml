@@ -1,0 +1,23 @@
+chaos:
+  monkey:
+    enabled: true
+    watcher:
+      component: false
+      controller: false
+      repository: false
+      rest-controller: true
+      service: true
+
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
+    chaosmonkeyjmx:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - 'health'
+          - 'info'
+          - 'chaosmonkey'
