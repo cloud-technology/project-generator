@@ -1,18 +1,21 @@
 package com.ct.builder.application.component.impl;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.ct.builder.application.component.ApiGenerator;
-import com.ct.builder.domain.valueobjects.ApiVO;
 
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
+
+import com.ct.builder.application.component.ApiGenerator;
+import com.ct.builder.domain.valueobjects.ApiVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +34,7 @@ public class OpenAPIGenerator implements ApiGenerator {
     private String generatorName = "spring";
 
     @Override
-    public void generate(ApiVO apiVO) {
+    public void generate(ApiVO apiVO) throws IOException {
         // 輸入規格檔案
         File specFile = apiVO.specSource().toFile();
 
@@ -72,7 +75,8 @@ public class OpenAPIGenerator implements ApiGenerator {
         // configurator.addAdditionalProperty("responseWrapper", "CompletableFuture");
         //
         configurator.setLibrary("spring-boot");
-        configurator.setTemplateDir("/Users/samzhu/workspace/test/projectBuilder/src/main/resources/templates/api");
+        
+        configurator.setTemplateDir(Path.of(new ClassPathResource("templates/api").getURI()).toString());
         configurator.setInvokerPackage(apiVO.packageName());
         configurator.setApiPackage(apiVO.packageName()+".interfaces.rest");
         configurator.setModelPackage(apiVO.packageName()+".interfaces.rest.dto");
