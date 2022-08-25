@@ -7,5 +7,5 @@ vscode:
     - Pivotal.vscode-boot-dev-pack
     - GabrielBB.vscode-lombok
     - ms-azuretools.vscode-docker
-    - cweijan.vscode-database-client2
+    - ppz.ppz
 
