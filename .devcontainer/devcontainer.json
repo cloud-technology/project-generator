@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/blob/main/containers/java/.devcontainer/devcontainer.json
+{
+	"name": "Java",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update the VARIANT arg to pick a Java version: 11, 16
+			"VARIANT": "17-bullseye",
+			// Options
+			"INSTALL_MAVEN": "false",
+			"INSTALL_GRADLE": "true",
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"java.home": "/docker-java-home"
+	},
+	
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		// IDE
+		"MS-CEINTL.vscode-language-pack-zh-hant",
+		// Java
+		"vscjava.vscode-java-pack", "GabrielBB.vscode-lombok", "Pivotal.vscode-boot-dev-pack",
+		"shengchen.vscode-checkstyle",
+		"richardwillis.vscode-gradle-extension-pack",
+		// Coding Helper
+		"VisualStudioExptTeam.vscodeintellicode", "GitHub.copilot",
+		// Markdown
+		"yzhang.markdown-all-in-one", "DavidAnson.vscode-markdownlint", "shd101wyy.markdown-preview-enhanced",
+		// Tools
+		"ms-azuretools.vscode-docker", "jebbs.plantuml", "hediet.vscode-drawio", "42Crunch.vscode-openapi",
+		"mhutchie.git-graph", "eamodio.gitlens",
+		// Security
+		"redhat.fabric8-analytics", 
+		// Quality
+		"sonarsource.sonarlint-vscode",
+		// Other
+		"PKief.material-icon-theme", "GitHub.copilot"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [8080],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+
+	"mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ]
+}
