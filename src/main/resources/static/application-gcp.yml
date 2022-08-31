@@ -1,0 +1,43 @@
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: ${db_username}
+    password: ${sm://db_password}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 5
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  cloud:
+    gcp:
+      sql:
+        instance-connection-name: ${sql_instance_connection_name}
+        database-name: ${sql_database_name}
+  redis:
+    database: 0
+    host: ${redis_host}
+    port: 6378
+    password: ${sm://redis_password}
+    ssl: false
+  cache:
+    redis:
+      time-to-live: 600000
+
+logging:
+  level:
+    root: info
+    com.example.demo: info
+    com.zaxxer.hikari.pool.HikariPool: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, mappings, prometheus
+  info:
+    git:
+      mode: simple
+  
