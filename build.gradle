@@ -1,8 +1,10 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.3'
-	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.7.3'
+  id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+  id 'java'
+//   id 'org.springframework.experimental.aot' version '0.12.1'
 }
+
 
 group = 'com.ct'
 version = '0.0.1-SNAPSHOT'
@@ -17,6 +19,7 @@ configurations {
 }
 
 repositories {
+	// maven { url 'https://repo.spring.io/release' }
 	mavenCentral()
 }
 
@@ -49,7 +52,8 @@ dependencies {
 	// https://search.maven.org/artifact/jakarta.xml.bind/jakarta.xml.bind-api
 	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
 	implementation "org.liquibase:liquibase-core:${liquibaseCoreVersion}"
-	implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"  
+	implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
+	// implementation "org.springdoc:springdoc-openapi-native:${springdocVersion}"
 	//
 	testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
@@ -69,3 +73,18 @@ tasks.named('test') {
 	useJUnitPlatform()
 	testLogging.showStandardStreams = true
 }
+
+// tasks.named('bootBuildImage') {
+//   builder = 'paketobuildpacks/builder:tiny'
+//   environment = [
+// 	'BP_NATIVE_IMAGE': 'true'
+//   ]
+// }
+
+// graalvmNative {
+//     binaries {
+//         main {
+//             buildArgs "-H:IncludeResources=\"templates/project/application-gcp.yml.mustache\""
+//         }
+//     }
+// }
