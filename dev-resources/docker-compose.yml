@@ -4,8 +4,9 @@ services:
     image: 'ghcr.io/cloud-technology/project-generator/project-generator:2'
     ports:
       - '8080:8080'
-
-  database: # https://hub.docker.com/_/postgres
+  
+  # https://hub.docker.com/_/postgres
+  database: 
     image: 'postgres:14.2'
     ports:
       - '5432:5432'
@@ -13,3 +14,16 @@ services:
       POSTGRES_USER: 'user1'
       POSTGRES_PASSWORD: 'pw123456'
       POSTGRES_DB: 'devdb'
+  
+  # https://hub.docker.com/r/stoplight/prism
+  # https://github.com/stoplightio/prism/blob/master/examples/petstore.oas3.yaml
+  mockPetstore:
+    image: 'stoplight/prism:4.10.5'
+    restart: always
+    command: mock -h 0.0.0.0 "/specs/petstore.oas3.yaml"
+    volumes:
+      - ./specs:/specs
+    ports:
+      - '4010:4010'
+
+
