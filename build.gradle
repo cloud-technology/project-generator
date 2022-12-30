@@ -6,7 +6,7 @@ plugins {
 }
 
 
-group = 'com.ct'
+group = 'io.github.cloud-technology'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
