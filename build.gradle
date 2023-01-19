@@ -1,7 +1,7 @@
 plugins {
-  id 'org.springframework.boot' version '2.7.3'
-  id 'io.spring.dependency-management' version '1.0.13.RELEASE'
   id 'java'
+  id 'org.springframework.boot' version '3.0.1'
+  id 'io.spring.dependency-management' version '1.1.0'
 //   id 'org.springframework.experimental.aot' version '0.12.1'
 }
 
@@ -24,11 +24,11 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "2021.0.3")
+	set('springCloudVersion', "2022.0.0")
 	set('testcontainersVersion', "1.17.3") // https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
 	set('openapiGeneratorVersion', "6.0.1") // https://search.maven.org/artifact/org.openapitools/openapi-generator
-	set('jooqVersion', "3.16.9") // https://search.maven.org/artifact/org.jooq/jooq-parent
-	set('liquibaseCoreVersion', "4.15.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
+	set('jooqVersion', "3.17.6") // https://search.maven.org/search?q=a:jooq-parent
+	set('liquibaseCoreVersion', "4.18.0") // https://search.maven.org/artifact/org.liquibase/liquibase-core
 	set('springdocVersion', "1.6.11") // https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui
 }
 
@@ -36,7 +36,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-mustache'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
