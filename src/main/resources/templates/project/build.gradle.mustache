@@ -68,7 +68,8 @@ dependencyManagement {
 
 tasks.withType(JavaCompile) {
     options.compilerArgs = [
-      '-Amapstruct.verbose=true'
+      '-Amapstruct.verbose=true',
+      '-Amapstruct.defaultComponentModel=spring'
     ]
 }
 
