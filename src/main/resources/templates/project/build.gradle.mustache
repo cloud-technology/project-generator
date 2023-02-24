@@ -1,14 +1,4 @@
-plugins {
-  id 'org.springframework.boot' version '2.7.0'
-  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-  id 'java'
-  id 'jacoco'
-}
-
-group = '{{groupId}}'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
+@@ -12,48 +12,54 @@ sourceCompatibility = '17'
 configurations {
   compileOnly {
     extendsFrom annotationProcessor
@@ -21,6 +11,8 @@ repositories {
 
 ext {
   set('springCloudVersion', "2021.0.3")
+  set('mapstructVersion', "1.5.3.Final") // https://search.maven.org/artifact/org.mapstruct/mapstruct
+  set('lombokMapstructBindingVersion', "0.2.0")
   set('testcontainersVersion', "1.17.3") // https://search.maven.org/artifact/org.testcontainers/testcontainers-bom
   set('springCloudGcpVersion', "3.3.0") // https://search.maven.org/artifact/com.google.cloud/spring-cloud-gcp-dependencies
   set('springdocVersion', "1.6.11") // https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui
@@ -45,6 +37,10 @@ dependencies {
   runtimeOnly 'org.postgresql:postgresql'
   compileOnly 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'
+  // mapstruct
+  implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+  annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+  annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
   //
   implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
   implementation "org.springdoc:springdoc-openapi-data-rest:${springdocVersion}"
@@ -57,11 +53,7 @@ dependencies {
 	implementation 'com.google.cloud:spring-cloud-gcp-starter-metrics'
 	implementation 'com.google.cloud:spring-cloud-gcp-starter-logging'
   // chaos-monkey
-	implementation "de.codecentric:chaos-monkey-spring-boot:${chaosMonkeyVersion}"
-  // for test
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
-  testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
+@@ -65,24 +71,30 @@ dependencies {
   testImplementation 'org.testcontainers:junit-jupiter'
   testImplementation 'org.testcontainers:postgresql'
 }
@@ -72,6 +64,12 @@ dependencyManagement {
     mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     mavenBom "com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"
   }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs = [
+      '-Amapstruct.verbose=true'
+    ]
 }
 
 tasks.named('test') {
@@ -86,6 +84,3 @@ jacocoTestReport {
 		// sonar analysis equired
 		xml.required.set(true)
 		csv.required.set(true)
-		html.required.set(true)
-	}
-}
